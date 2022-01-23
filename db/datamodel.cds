@@ -1,9 +1,11 @@
-namespace shaj.db;
+//namespace shaj.db;
 
 using { cuid, managed, temporal, Currency } from '@sap/cds/common';
 using { shaj.common } from './commons';
 
 type Guid: String(32);
+
+context shaj.db {
 context master {
     entity businesspartner {
         key NODE_KEY : Guid;
@@ -195,4 +197,25 @@ context transaction {
         }
         group by ProductId,Country,PO_ORDERS.CurrencyCode
 
+}
+}
+
+@cds.persistence.calcview
+@cds.persistence.exists 
+Entity ![CV_PURCHASE] {
+key     ![NODE_KEY]: String(32)  @title: 'NODE_KEY: NODE_KEY' ; 
+key     ![BP_ROLE]: String(2)  @title: 'BP_ROLE: BP_ROLE' ; 
+key     ![EMAIL_ADDRESS]: String(105)  @title: 'EMAIL_ADDRESS: EMAIL_ADDRESS' ; 
+key     ![CITY]: String(44)  @title: 'CITY: CITY' ; 
+key     ![POSTAL_CODE]: String(8)  @title: 'POSTAL_CODE: POSTAL_CODE' ; 
+key     ![STREET]: String(44)  @title: 'STREET: STREET' ; 
+key     ![CURRENCY_CODE]: String(3)  @title: 'CURRENCY_CODE: CURRENCY_CODE' ; 
+key     ![ID]: String(36)  @title: 'ID: ID' ; 
+key     ![PO_ID]: Integer  @title: 'PO_ID: PO_ID' ; 
+key     ![LIFECYCLE_STATUS]: String(1)  @title: 'LIFECYCLE_STATUS: LIFECYCLE_STATUS' ; 
+key     ![PO_ITEM_POS]: Integer  @title: 'PO_ITEM_POS: PO_ITEM_POS' ; 
+key     ![PRODUCT_GUID_NODE_KEY]: String(32)  @title: 'PRODUCT_GUID_NODE_KEY: PRODUCT_GUID_NODE_KEY' ; 
+key     ![GROSS_AMOUNT]: Decimal(15, 2)  @title: 'GROSS_AMOUNT: GROSS_AMOUNT' ; 
+key     ![NET_AMOUNT]: Decimal(15, 2)  @title: 'NET_AMOUNT: NET_AMOUNT' ; 
+key     ![TAX_AMOUNT]: Decimal(15, 2)  @title: 'TAX_AMOUNT: TAX_AMOUNT' ; 
 }

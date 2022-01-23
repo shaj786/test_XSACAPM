@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_PO" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="Purchase Order"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="SHAJ_DB_TRANSACTION_PURCHASEORDER">
+    <resourceUri>SHAJ_DB_TRANSACTION_PURCHASEORDER</resourceUri>
+  </DataSource>
+  <DataSource id="SHAJ_DB_TRANSACTION_POITEMS">
+    <resourceUri>SHAJ_DB_TRANSACTION_POITEMS</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_N" joinType="referential">
+    <viewAttributes>
+      <viewAttribute id="CURRENCY_CODE"/>
+      <viewAttribute id="GROSS_AMOUNT" aggregationType="sum"/>
+      <viewAttribute id="NET_AMOUNT" aggregationType="sum"/>
+      <viewAttribute id="TAX_AMOUNT" aggregationType="sum"/>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="PO_ID" aggregationType="sum"/>
+      <viewAttribute id="LIFECYCLE_STATUS"/>
+      <viewAttribute id="PO_ITEM_POS" aggregationType="sum"/>
+    
+      <viewAttribute id="PRODUCT_GUID_NODE_KEY"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="SHAJ_DB_TRANSACTION_PURCHASEORDER">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY_CODE" source="CURRENCY_CODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="GROSS_AMOUNT" source="GROSS_AMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NET_AMOUNT" source="NET_AMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TAX_AMOUNT" source="TAX_AMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PO_ID" source="PO_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LIFECYCLE_STATUS" source="LIFECYCLE_STATUS"/>
+    </input>
+    <input node="SHAJ_DB_TRANSACTION_POITEMS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PO_ITEM_POS" source="PO_ITEM_POS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_GUID_NODE_KEY" source="PRODUCT_GUID_NODE_KEY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="PARENT_KEY_ID"/>
+    </input>
+    <joinAttribute name="ID"/>
+  </calculationView>
+</calculationViews>
+
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="CURRENCY_CODE" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CURRENCY_CODE"/>
+      <keyMapping columnObjectName="Join_1" columnName="CURRENCY_CODE"/>
+    </attribute>
+    <attribute id="ID" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ID"/>
+      <keyMapping columnObjectName="Join_1" columnName="ID"/>
+    </attribute>
+    <attribute id="PO_ID" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PO_ID"/>
+      <keyMapping columnObjectName="Join_1" columnName="PO_ID"/>
+    </attribute>
+    <attribute id="LIFECYCLE_STATUS" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LIFECYCLE_STATUS"/>
+      <keyMapping columnObjectName="Join_1" columnName="LIFECYCLE_STATUS"/>
+    </attribute>
+    <attribute id="PO_ITEM_POS" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PO_ITEM_POS"/>
+      <keyMapping columnObjectName="Join_1" columnName="PO_ITEM_POS"/>
+    </attribute>
+    <attribute id="PRODUCT_GUID_NODE_KEY" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT_GUID_NODE_KEY"/>
+      <keyMapping columnObjectName="Join_1" columnName="PRODUCT_GUID_NODE_KEY"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="GROSS_AMOUNT" order="2" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="GROSS_AMOUNT"/>
+      <measureMapping columnObjectName="Join_1" columnName="GROSS_AMOUNT"/>
+    </measure>
+    <measure id="NET_AMOUNT" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="NET_AMOUNT"/>
+      <measureMapping columnObjectName="Join_1" columnName="NET_AMOUNT"/>
+    </measure>
+    <measure id="TAX_AMOUNT" order="4" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="TAX_AMOUNT"/>
+      <measureMapping columnObjectName="Join_1" columnName="TAX_AMOUNT"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="77" y="105"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+    
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="67" y="254"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="SHAJ_DB_TRANSACTION_PURCHASEORDER" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="57" y="12"/>
+      <rectangleSize width="331"/>
+    </shape>
+    <shape modelObjectName="SHAJ_DB_TRANSACTION_POITEMS" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="471" y="25"/>
+      <rectangleSize width="274"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
