@@ -1,12 +1,15 @@
-using { shaj.db.master, shaj.db.transaction, shaj.db.CDSViews, CV_PURCHASE } from '../db/datamodel';
+using { shaj.db.master, shaj.db.transaction, shaj.db.CDSViews, CV_PURCHASE, CV_PURCHASE_ORD } from '../db/datamodel';
 
 
-service CatalogService@(path:'/CatalogService') {
+service CatalogService@(path:'/CatalogService') 
+    @(requires: 'authenticated-user')
+{
 
     function sleep() returns Boolean;
-
+    //@readonly
+    @Capabilities : { Insertable, Updatable: false, Deletable }
     entity EmployeeSet as projection on master.employees;
-
+    @readonly
     entity AddressSet as projection on master.address;
 
     entity ProductSet as projection on master.product;
@@ -34,5 +37,5 @@ service CatalogService@(path:'/CatalogService') {
     };
 
     entity PurchaseOrders as projection on CV_PURCHASE;
-
+    entity PurchaseOrdersPerCustomer as projection on CV_PURCHASE_ORD;
 }

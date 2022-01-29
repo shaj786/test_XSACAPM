@@ -219,3 +219,17 @@ key     ![GROSS_AMOUNT]: Decimal(15, 2)  @title: 'GROSS_AMOUNT: GROSS_AMOUNT' ;
 key     ![NET_AMOUNT]: Decimal(15, 2)  @title: 'NET_AMOUNT: NET_AMOUNT' ; 
 key     ![TAX_AMOUNT]: Decimal(15, 2)  @title: 'TAX_AMOUNT: TAX_AMOUNT' ; 
 }
+
+@cds.persistence.calcview
+@cds.persistence.exists 
+Entity ![CV_PURCHASE_ORD] {
+key     ![EMAIL]: String(80)  @title: 'EMAIL: EMAIL' ; 
+key     ![COMPANY]: String(250)  @title: 'COMPANY: COMPANY' ; 
+key     ![CITY]: String(100)  @title: 'CITY: CITY' ; 
+key     ![SUPPLIER_ID]: String(32)  @title: 'SUPPLIER_ID: SUPPLIER_ID' ; 
+key     ![COUNTRY]: String(100)  @title: 'COUNTRY: COUNTRY' ; 
+key     ![PARTNER_GUID_NODE_KEY]: String(32)  @title: 'PARTNER_GUID_NODE_KEY: PARTNER_GUID_NODE_KEY' ; 
+key     ![GROSS_AMOUNT]: Decimal(15, 2)  @title: 'GROSS_AMOUNT: GROSS_AMOUNT' ; 
+key     ![NET_AMOUNT]: Decimal(15, 2)  @title: 'NET_AMOUNT: NET_AMOUNT' ; 
+key     ![TAX_AMOUNT]: Decimal(15, 2)  @title: 'TAX_AMOUNT: TAX_AMOUNT' ; 
+}
